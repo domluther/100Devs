@@ -1,0 +1,153 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  font-size: 62.5%;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header {
+}
+
+.navbar,
+.main,
+.cards {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  flex: 1;
+}
+
+.navbar .container {
+  justify-content: space-between;
+}
+
+.navbar li {
+  margin-left: 1rem;
+}
+
+main {
+  min-height: 15rem;
+}
+
+.main .container {
+  align-items: flex-start;
+  height: 100%;
+}
+
+.main-text {
+  flex: 2;
+}
+
+.logo {
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+}
+
+.cards {
+  justify-content: space-evenly;
+}
+
+.card {
+  padding: 2%;
+  border-radius: 2rem;
+  margin: 2%;
+  box-shadow: 0.5rem 0.5rem 0.75rem black;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+main,
+.card {
+  background-color: #0151cc;
+}
+
+.navbar {
+  background-color: #3573e1;
+  height: 4rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar a:hover {
+  color: lightblue;
+}
+
+.cards {
+  background-color: #a1c3ff;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 1.6rem;
+  padding: 1rem 0;
+  font-weight: 700;
+}
+
+a {
+  font-size: 1.2rem;
+}
+
+span {
+  font-size: 2.2rem;
+}
+
+p {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 800px) {
+  .main .container,
+  .cards .container {
+    flex-direction: column;
+  }
+
+  .card {
+    max-width: 400px;
+  }
+
+  main {
+    min-height: 20rem;
+  }
+}

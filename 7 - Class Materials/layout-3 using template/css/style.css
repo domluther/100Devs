@@ -1,0 +1,78 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header {
+  height: 100px;
+  border: 2px solid green;
+}
+
+footer {
+  height: 100px;
+  clear: both;
+  border: 2px solid orange;
+}
+
+section {
+  width: 20%;
+  height: 400px;
+  float: left;
+  border: 2px dashed pink;
+}
+
+.widerSection {
+  width: 40%;
+  border: 6px dashed skyblue;
+}
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+@media screen and (max-width: 600px) {
+  section {
+    background-color: green;
+  }
+  /* Screen to narrow so hide the main one and re-size the smaller ones */
+  .widerSection {
+    display: none;
+  }
+  section {
+    width: 33.3333%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  section {
+    background: orange;
+  }
+}
+
+@media (min-width: 901px) {
+  section {
+    background-color: red;
+  }
+}

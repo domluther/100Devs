@@ -1,0 +1,17 @@
+h2 {
+  color: red;
+}
+
+/* h2s directly inside a section */
+section > h2 {
+  color: blue;
+}
+
+/* unicorn */
+/* section > article > h2 {
+  color: orange;
+} */
+/* Duck */
+section + article > h2 {
+  color: purple;
+}

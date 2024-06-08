@@ -1,0 +1,211 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+:root {
+  --dark-blue: #30465a;
+  --off-white: #f5f9fc;
+}
+
+body {
+  font-size: 62.5%;
+  background-color: var(--off-white);
+  color: var(--dark-blue);
+  font-family: 'Roboto', sans-serif;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header > * {
+  float: left;
+  margin: 1rem 0rem;
+}
+
+header h2 {
+  float: left;
+  margin-left: 3rem;
+}
+
+header nav {
+  width: 50%;
+  margin-left: 20%;
+}
+
+nav li {
+  float: left;
+  padding: 0 2rem;
+}
+header .btn {
+  float: right;
+  margin-right: 3rem;
+}
+
+main > section {
+  float: left;
+  width: 50%;
+}
+
+main > section > * {
+  margin: 1rem 0;
+}
+
+.left {
+  float: left;
+  width: 40%;
+  padding-left: 5rem;
+  padding-right: 1rem;
+  padding-top: 6rem;
+}
+
+.right {
+  width: 50%;
+  height: 500px;
+  float: right;
+}
+
+.right img {
+  float: right;
+  height: 100%;
+  width: 100%;
+}
+
+.features {
+  padding: 3rem;
+}
+
+.features > section {
+  width: 19%;
+  float: left;
+  margin: 3%;
+}
+
+.features > section > * {
+  padding: 0.5rem 1rem;
+}
+
+footer {
+  padding: 3rem 5rem;
+}
+
+footer > * {
+  width: 50%;
+  padding: 0.5rem 0;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+span {
+  text-transform: uppercase;
+  color: grey;
+  font-weight: 600;
+}
+
+p {
+  font-size: 0.8rem;
+}
+a {
+  text-decoration: none;
+  color: var(--dark-blue);
+  font-size: 0.8rem;
+}
+
+.features a {
+  font-weight: 700;
+}
+input {
+  background: #e2e9f1;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-weight: 500;
+  height: 40px;
+  width: 60%;
+}
+
+.btn {
+  background-color: var(--dark-blue);
+  padding: 0.7rem 1.5rem;
+  color: var(--off-white);
+  font-size: 1rem;
+  font-weight: 500;
+  height: 40px;
+}
+.icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+.empty {
+  width: 100%;
+  background-color: #e2e9f1;
+}
+
+.hamburger {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+@media all and (max-width: 600px) {
+  nav,
+  header .btn {
+    display: none;
+  }
+
+  .hamburgerMenu {
+    display: block;
+  }
+
+  main > section,
+  .left,
+  .right {
+    clear: both;
+    width: 100%;
+  }
+
+  .features {
+    padding: 1rem;
+  }
+  .features > section {
+    width: 35%;
+    float: left;
+    margin: 3%;
+  }
+}

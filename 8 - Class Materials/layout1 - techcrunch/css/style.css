@@ -1,0 +1,194 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  font-size: 62.5%;
+  font-family: 'aktiv-grotesk', sans-serif;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header {
+}
+
+footer {
+}
+
+nav,
+main,
+aside,
+section {
+  float: left;
+  padding: 1rem;
+}
+
+nav {
+  width: 15%;
+  padding: 1.5rem;
+  height: 100%;
+}
+
+section {
+  width: 85%;
+}
+
+main {
+  width: 50%;
+}
+
+aside {
+  width: 35%;
+}
+
+article header,
+article p,
+article img {
+  width: 33%;
+  padding: 0 1rem;
+  float: left;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+aside.empty {
+  clear: both;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.logo {
+  width: 85%;
+}
+
+nav a {
+  color: grey;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+nav a:hover {
+  color: #49cf37;
+}
+
+input {
+  font-size: 1.2rem;
+  width: 80%;
+  border: 0;
+}
+
+.writer {
+  font-size: 0.8rem;
+}
+
+.time {
+  font-size: 0.8rem;
+  display: block;
+  color: grey;
+}
+
+.main-image {
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin: 0;
+}
+
+p {
+  font-family: 'Helvetica Neue';
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: grey;
+}
+
+.extra-logo {
+  width: 15%;
+  padding: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  padding: 0rem;
+}
+
+aside li {
+  border-top: 1px solid lightgrey;
+}
+
+aside li:first-of-type {
+  border-top: 0;
+}
+
+aside.empty {
+  width: 15%;
+}
+
+h3 {
+  font-size: 1.25rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+@media screen and (max-width: 950px) {
+  nav,
+  aside.empty {
+    display: none;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  main {
+    width: 65%;
+  }
+
+  aside {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  nav,
+  main,
+  aside,
+  section {
+    clear: both;
+  }
+
+  section,
+  main,
+  aside,
+  article header,
+  article p,
+  article img {
+    width: 100%;
+  }
+}

@@ -1,0 +1,24 @@
+/* Make the h1 purple */
+h1 {
+  color: purple;
+}
+
+/* All h2s to be yellow */
+h2 {
+  color: yellow;
+}
+
+/* World + Zebra to be blue, not unicorn or duck */
+section > h2 {
+  color: blue;
+}
+
+/* unicorn duck red */
+article > h2 {
+  color: red;
+}
+
+/* unicorn orange */
+section > article > h2 {
+  color: orange;
+}

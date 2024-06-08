@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="This is where your description goes" />
+    <meta name="keywords" content="one, two, three" />
+
+    <title>Temp converter</title>
+
+    <!-- external CSS link -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Temp conversion</h1>
+    <p>Slide the slider to see the temperature in C + F</p>
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        class="slider"
+        id="tempSlider"
+      />
+      <p id="output">
+        <span id="celsius">0</span> celsius is
+        <span id="fahrenheit">32</span> fahrenheit.
+      </p>
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

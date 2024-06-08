@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  height: 200px;
+  background-color: orange;
+}
+
+section {
+  height: 300px;
+  width: 33.3333%;
+  float: left;
+  border: 3px solid green;
+}
+
+footer {
+  height: 200px;
+  background-color: pink;
+  clear: both;
+}

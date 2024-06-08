@@ -1,0 +1,344 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  font-size: 62.5%;
+  background-color: #f1f6f9;
+  font-family: 'Rubik', sans-serif;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header > nav {
+  float: right;
+  width: 60%;
+}
+
+header > nav li {
+  float: left;
+  width: 12%;
+  margin: 2% 0%;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  height: 400px;
+}
+
+main section {
+  margin-top: 6%;
+  float: left;
+  width: 40%;
+  padding-left: 10%;
+}
+
+.about-us {
+  width: 100%;
+  height: 400px;
+  padding: 4% 20% 0 40%;
+}
+
+.about-us > * {
+  padding: 2% 0%;
+}
+
+.about-us h2 {
+  padding-right: 10%;
+}
+
+section ul li {
+  margin-top: 2rem;
+  float: left;
+  width: 20%;
+}
+
+.testimonials ul li {
+  float: none;
+  margin: auto;
+  width: 30%;
+}
+
+section.specials {
+  width: 80%;
+  margin: auto;
+  padding-top: 5%;
+  text-align: center;
+}
+
+.specials ul {
+  width: 60%;
+  margin: auto;
+}
+
+.openings {
+  margin: 0 20%;
+}
+
+.openings > section {
+  width: 45%;
+  float: left;
+}
+
+.video-container > section {
+  float: left;
+}
+
+.arrows {
+  width: 5%;
+}
+
+.arrows span {
+  padding-top: 12rem;
+  display: block;
+}
+
+.video-container {
+  width: 80%;
+  margin-left: 25%;
+}
+
+.video-container > .video-center {
+  width: 50%;
+}
+
+.testimonials .content {
+  width: 70%;
+  margin: auto;
+}
+
+footer section section {
+  width: 23%;
+  float: left;
+  text-align: left;
+  margin-left: 2%;
+}
+
+footer > section {
+  margin: 0 10%;
+}
+
+.end span {
+  float: left;
+}
+.footer-social {
+  float: right;
+  width: 20%;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+.nav-icon {
+  width: 30px;
+  height: 30px;
+}
+
+header li a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #303054;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Yeseva One', serif;
+  padding-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1rem;
+  color: orange;
+  padding: 1%;
+}
+p,
+a,
+span {
+  font-size: 0.9rem;
+  line-height: 1rem;
+  font-weight: 200;
+}
+
+footer p {
+  font-size: 0.7rem;
+}
+#search {
+  font-size: 0.8rem;
+  padding: 0.6rem;
+  width: 80%;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+  border-right: none;
+}
+
+.btn {
+  display: inline-block;
+  background: orange;
+  text-decoration: none;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 100;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+main {
+  background-image: url('../img/fruit.png');
+  background-size: cover;
+}
+
+.about-us {
+  background-image: url('../img/background2.png');
+  background-size: cover;
+}
+
+.specials {
+  background: #f2f6f7;
+}
+
+.gallery {
+  border-top: 1px solid pink;
+  margin-top: 1%;
+}
+
+.gallery img {
+  width: 20%;
+  margin: 2%;
+}
+.specials ul li a {
+  text-decoration: none;
+  color: #28284d;
+}
+.specials ul {
+  display: inline-block;
+  line-height: 2rem;
+}
+
+.specials ul li a:hover {
+  color: orange;
+}
+
+.slider {
+  height: 2rem;
+}
+
+.booking {
+  padding-top: 3rem;
+  background-color: #eae5e1;
+  text-align: center;
+}
+
+.booking * {
+  padding: 0.5rem;
+}
+
+.booking .icon {
+  height: 4rem;
+}
+
+.phone-num {
+  color: orange;
+}
+
+.booking .video {
+  width: 100%;
+}
+
+.day {
+  text-align: left;
+}
+
+.time {
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: block;
+}
+
+.testimonials {
+  background: #fff;
+}
+
+.face,
+.stars {
+  width: 60%;
+}
+
+.content .name {
+  width: 60%;
+  font-weight: 100;
+}
+
+.name h3 {
+  font-family: 'Rubik', sans-serif;
+}
+
+em {
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+footer {
+  background: #f2f6f7;
+}
+
+.logo {
+  width: 60%;
+}
+
+.contacts {
+  color: orange;
+  text-decoration: underline;
+}
+
+footer input {
+  width: 90%;
+}
+
+.end {
+  border-top: 1px solid lightgray;
+}
