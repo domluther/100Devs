@@ -1,7 +1,7 @@
 // *Variables*
 // Declare a variable, reassign it to your fav holiday, make sure it is in all caps, and print the value to the console
 let newVar;
-newVar = 'EASTER';
+newVar = 'easter'.toUpperCase();
 console.log(newVar);
 //Declare a variable, assign it a string, alert the last three characters in the string (Use your google-fu and the MDN)
 let secondVar;
@@ -11,7 +11,7 @@ console.log(secondVar.slice(-3));
 // *Functions*
 // Create a function that takes in 5 numbers. Subtract all five from 100. Alert the absolute value of the difference. Call the function.
 function fiveNumFun(num1, num2, num3, num4, num5) {
-  return 100 - num1 - num2 - num3 - num4 - num5;
+  return Math.abs(100 - num1 - num2 - num3 - num4 - num5);
 }
 
 console.log(fiveNumFun(2, 3, 4, 5, 6));
