@@ -1,5 +1,6 @@
 //Create a mouse object that has four properties and three methods
 
+// Creating as a literal object instead of using a constructor
 const mouse = {
   name: 'Bob',
   colour: 'grey',
@@ -21,3 +22,24 @@ mouse.sayHi();
 mouse.growLeg(2);
 mouse.sayHi();
 mouse.squeak();
+
+const computerMouse = {
+  model: 'Apple',
+  buttons: 3,
+  colour: 'silver',
+  wireless: true,
+
+  leftClick() {
+    console.log('Left clicked!');
+  },
+  rightClick() {
+    console.log("Right clicks don't exist - it is Apple");
+  },
+  wiggle() {
+    console.log('cursor moved');
+  },
+};
+
+computerMouse.leftClick();
+computerMouse.rightClick();
+computerMouse.wiggle();
