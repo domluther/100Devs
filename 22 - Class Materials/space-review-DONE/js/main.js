@@ -1,8 +1,8 @@
 //Arrays
 
 //Create and array of numbers. Sum all of the numbers. Alert the sum.
-nums = [1, 2, 3, 4, 5, 6];
-sum = nums.reduce((acc, cur) => acc + cur);
+const nums = [1, 2, 3, 4, 5, 6];
+const sum = nums.reduce((acc, cur) => acc + cur);
 
 console.log(sum);
 
