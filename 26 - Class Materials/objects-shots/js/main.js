@@ -5,12 +5,10 @@ buttonEle.addEventListener('click', fetchCocktail);
 
 function fetchCocktail(e) {
   e.preventDefault();
-  console.log('clicky');
   // Read in the value
   const search = document.querySelector('input').value.replaceAll(' ', '%20');
-  console.log(search);
   // Update the URL
-  url = `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
+  url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
   // Fetch
   fetch(url)
     .then((res) => res.json())
@@ -23,7 +21,11 @@ function parseData(data) {
   console.log(first);
   //   Update DOM based on fetched data
   document.querySelector('img').src = first.strDrinkThumb;
+  document.querySelector('img').alt = first.strDrink;
   document.querySelector('h2').innerText = first.strDrink;
-  document.querySelector('h3').innerText = first.strInstructions;
+  document.querySelector('h3').innerText = first.strInstructions.replaceAll(
+    '.',
+    '\n'
+  );
   //   console.log(first.strDrink);
 }
