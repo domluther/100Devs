@@ -12,7 +12,12 @@ function getFetch() {
       console.log(data);
       document.querySelector('#title').innerText = data.title;
       document.querySelector('#explanation').innerText = data.explanation;
-      document.querySelector('#potd').src = data.url;
+      if (data.media_type === 'image') {
+        document.querySelector('#potd').src = data.url;
+      } else {
+        document.querySelector('#potd').src = '';
+        document.querySelector('iframe').src = data.url;
+      }
     })
     .catch((err) => {
       console.log(`error ${err}`);
