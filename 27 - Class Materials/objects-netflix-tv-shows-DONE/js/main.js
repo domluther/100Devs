@@ -18,6 +18,10 @@ class NetflixTVShow {
   decrementRating() {
     this.rating = Math.max(this.rating - 1, 0);
   }
+
+  cancel() {
+    console.log(`Sorry to report - ${this.name} has been cancelled`);
+  }
 }
 
 const strangerThings = new NetflixTVShow(
@@ -37,3 +41,4 @@ strangerThings.decrementRating();
 strangerThings.decrementRating();
 strangerThings.decrementRating();
 strangerThings.outputRating();
+strangerThings.cancel();
