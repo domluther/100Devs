@@ -3,6 +3,7 @@ document.querySelector('button').addEventListener('click', getFetch);
 
 function getFetch() {
   const date = document.querySelector('input').value;
+  const apiKey = '';
   const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
 
   fetch(url)
