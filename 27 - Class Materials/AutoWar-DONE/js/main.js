@@ -200,12 +200,15 @@ function setBorder(winner) {
 
   // Apply the appropriate one
   if (winner === 'p1') {
+    document.body.style.backgroundColor = 'lightyellow';
     p1CardImg.classList.add('win');
     p2CardImg.classList.add('lose');
   } else if (winner === 'p2') {
+    document.body.style.backgroundColor = 'lightyellow';
     p1CardImg.classList.add('lose');
     p2CardImg.classList.add('win');
   } else {
+    document.body.style.backgroundColor = 'red';
     p1CardImg.classList.add('war');
     p2CardImg.classList.add('war');
   }
