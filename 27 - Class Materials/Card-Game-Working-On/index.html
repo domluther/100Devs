@@ -21,6 +21,7 @@
     <h1>Play War!</h1>
     <button type="button" name="button" id="startGame">Start a new game</button>
     <button type="button" name="button" id="nextMove">Next move</button>
+    <button type="button" name="button" id="autoPlay">Auto play</button>
 
     <h2>Current move</h2>
     <div id="cardDiv">
@@ -40,8 +41,12 @@
     </div>
 
     <h2>Cards remaining</h2>
-    <h3>Player 1 - <span id="p1CardsCount">Num</span></h3>
-    <h3>Player 2 - <span id="p2CardsCount">Num</span></h3>
+    <h3>Player 1 - <span id="p1CardsCount"></span></h3>
+    <h3>Player 2 - <span id="p2CardsCount"></span></h3>
+
+    <div id="winner">
+      <h2></h2>
+    </div>
 
     <script type="text/javascript" src="js/main.js"></script>
   </body>

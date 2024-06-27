@@ -13,15 +13,18 @@ https://deckofcardsapi.com/
 
 document.querySelector('#startGame').addEventListener('click', startGame);
 document.querySelector('#nextMove').addEventListener('click', nextMove);
+document.querySelector('#autoPlay').addEventListener('click', autoPlay);
 
 let stackOfCards = [];
+let timer;
 
 async function startGame() {
   // Clear the stack of cards
   stackOfCards = [];
+  const cardsToPlay = 8;
   localStorage.setItem('war', false);
   // Get a new deck and draw the 52 cards
-  const newDeckURL = 'https://deckofcardsapi.com/api/deck/new/draw/?count=52';
+  const newDeckURL = `https://deckofcardsapi.com/api/deck/new/draw/?count=${cardsToPlay}`;
 
   const p1Pile = [];
   const p2Pile = [];
@@ -42,13 +45,19 @@ async function startGame() {
   // Create initial two piles
   await addCardsToPile(p1Pile, 'p1Cards');
   const pileData = await addCardsToPile(p2Pile, 'p2Cards');
+  console.log('In Start Game');
   updateCardsRemaining(pileData.piles);
+}
+
+function autoPlay() {
+  nextMove();
+  timer = setTimeout(autoPlay, 1000);
 }
 
 async function addCardsToPile(pile, pileName) {
   const deckId = localStorage.getItem('deckId');
   let cardsToAdd = pile.join(',');
-
+  console.log(`Adding ${cardsToAdd} to ${pileName}`);
   // Needed to get the data back to update number
   const res = await fetch(
     `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/add/?cards=${cardsToAdd}`
@@ -61,32 +70,35 @@ async function nextMove() {
   let p1CardData;
   let p2CardData;
   let war = localStorage.getItem('war');
+  war = 'false';
   if (war === 'true') {
     // If state of war, draw 4 cards (3 to burn and the one to play)
     console.log('War so drawing 4');
     p1CardData = await drawCardAndUpdate('p1', 4);
     p2CardData = await drawCardAndUpdate('p2', 4);
   } else {
-    // Draw two cards
+    // Draw a card from each pile & update the pictures
     p1CardData = await drawCardAndUpdate('p1');
     p2CardData = await drawCardAndUpdate('p2');
   }
   localStorage.setItem('war', false);
 
+  // Who won?
   const result = pickWinner(p1CardData[0], p2CardData[0]);
-  // Add cards to pile of winnable cards
-  // TODO: Will need adjusting when WAR mode is on
-  addToStack(p1CardData);
-  addToStack(p2CardData);
   // Update the class so the border colour changes
   setBorder(result);
+
+  // Add cards to pile of winnable cards
+  addToStack(p1CardData);
+  addToStack(p2CardData);
+
   // If there is a winner
   // Add both cards to the correct pile
   if (result === 'p1') {
-    addCardsToPile(stackOfCards, 'p1Cards');
+    await addCardsToPile(stackOfCards, 'p1Cards');
     stackOfCards = [];
   } else if (result === 'p2') {
-    addCardsToPile(stackOfCards, 'p2Cards');
+    await addCardsToPile(stackOfCards, 'p2Cards');
     stackOfCards = [];
   } else if (result === 'war') {
     // Draw 3 more cards
@@ -95,29 +107,42 @@ async function nextMove() {
   }
   // Update the number
   const pileData = await getPileData('p1Cards');
+  console.log('Updating after the win');
+  console.log(pileData);
   updateCardsRemaining(pileData);
 }
 
 async function getPileData(pileName) {
+  console.log('Getting pile data');
   const deckId = localStorage.getItem('deckId');
 
   const res = await fetch(
     `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/list/`
   );
-  const data = res.json();
+  const data = await res.json();
   return data.piles;
 }
 
 async function drawCard(pileName, count = 1) {
+  // Draws a random card - stops it getting stuck in a loop
   const deckId = localStorage.getItem('deckId');
-  const drawURL = `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}Cards/draw/bottom/?count=${count}`;
+  const drawURL = `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}Cards/draw/random/?count=${count}`;
 
-  const res = await fetch(drawURL);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(drawURL);
+    if (!res.ok) {
+      gameOver(pileName);
+    }
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function updateCardsRemaining(piles) {
+  console.log('Updating card number');
+  console.log(piles);
   // Iterate through each pile
   for (pile in piles) {
     document.querySelector(`#${pile}Count`).innerText = piles[pile].remaining;
@@ -130,7 +155,7 @@ function updateCardImage(player, cards) {
 
 async function drawCardAndUpdate(player, count = 1) {
   const cardData = await drawCard(player, count);
-  updateCardsRemaining(cardData.piles);
+  // updateCardsRemaining(cardData.piles);
   updateCardImage(player, cardData.cards);
   return cardData.cards;
 }
@@ -182,5 +207,16 @@ function setBorder(winner) {
   } else {
     p1CardImg.classList.add('war');
     p2CardImg.classList.add('war');
+  }
+}
+
+function gameOver(loser) {
+  const h2Ele = document.querySelector('#winner h2');
+  if (loser === 'p1') {
+    h2Ele.innerText = `Player 2 wins!`;
+    clearTimeout(timer);
+  } else {
+    h2Ele.innerText = `Player 1 wins!`;
+    clearTimeout(timer);
   }
 }
