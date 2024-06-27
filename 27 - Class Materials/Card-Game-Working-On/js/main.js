@@ -12,45 +12,55 @@ https://deckofcardsapi.com/
 */
 
 document.querySelector('#startGame').addEventListener('click', startGame);
+document.querySelector('#nextMove').addEventListener('click', nextMove);
 
-function startGame() {
+async function startGame() {
   // Get a new deck and draw the 52 cards
   const newDeckURL = 'https://deckofcardsapi.com/api/deck/new/draw/?count=52';
 
-  const p1Cards = [];
-  const p2Cards = [];
+  const p1Pile = [];
+  const p2Pile = [];
 
-  fetch(newDeckURL)
-    .then((res) => res.json())
-    .then((data) => {
-      localStorage.setItem('deckId', data.deck_id);
-      console.log(localStorage.getItem('deckId'));
-      console.log(data.cards);
-      for (let i = 0; i < data.cards.length; i++) {
-        if (i % 2 === 0) p1Cards.push(data.cards[i].code);
-        else {
-          p2Cards.push(data.cards[i].code);
-        }
-      }
-      console.log(p1Cards);
-      console.log(p2Cards);
-    })
-    .catch((err) => {
-      console.error(`error ${err}`);
-    });
-  const addToPileURL = `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/add/?cards=${cardsToAdd}`;
-  // Create player 1 pile + player 2 pile
+  // Fetch a new deck
+  const newDeckRes = await fetch(newDeckURL);
+  const newDeckData = await newDeckRes.json();
+
+  localStorage.setItem('deckId', newDeckData.deck_id);
+
+  // Split the card into two piles
+  for (let i = 0; i < newDeckData.cards.length; i++) {
+    if (i % 2 === 0) p1Pile.push(newDeckData.cards[i].code);
+    else {
+      p2Pile.push(newDeckData.cards[i].code);
+    }
+  }
+  // Create initial two piles
+  await addCardsToPile(p1Pile, 'p1Cards');
+  await addCardsToPile(p2Pile, 'p2Cards');
 }
 
-function getFetch() {
-  const choice = document.querySelector('input').value;
+async function addCardsToPile(pile, pileName) {
+  const deckId = localStorage.getItem('deckId');
+  let cardsToAdd = pile.join(',');
+  console.debug(`Adding to ${pileName}`);
 
-  fetch(url)
-    .then((res) => res.json()) // parse response as JSON
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log(`error ${err}`);
-    });
+  await fetch(
+    `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/add/?cards=${cardsToAdd}`
+  );
+}
+
+async function nextMove() {
+  // Draw two cards
+  const cards = await drawCard('p1');
+  console.log(cards);
+}
+
+async function drawCard(pileName, count = 1) {
+  const deckId = localStorage.getItem('deckId');
+  const drawURL = `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}Cards/draw/?${count}`;
+
+  const res = await fetch(drawURL);
+  const data = await res.json();
+  console.log(data);
+  return data.cards;
 }
