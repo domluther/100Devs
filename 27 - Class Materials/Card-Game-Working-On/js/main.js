@@ -14,14 +14,16 @@ https://deckofcardsapi.com/
 document.querySelector('#startGame').addEventListener('click', startGame);
 document.querySelector('#nextMove').addEventListener('click', nextMove);
 document.querySelector('#autoPlay').addEventListener('click', autoPlay);
+document.querySelector('#stopAutoPlay').addEventListener('click', stopAutoPlay);
 
 let stackOfCards = [];
 let timer;
 
 async function startGame() {
+  document.querySelector('#winner h2').innerText = '';
   // Clear the stack of cards
   stackOfCards = [];
-  const cardsToPlay = 8;
+  const cardsToPlay = 16;
   localStorage.setItem('war', false);
   // Get a new deck and draw the 52 cards
   const newDeckURL = `https://deckofcardsapi.com/api/deck/new/draw/?count=${cardsToPlay}`;
@@ -45,7 +47,6 @@ async function startGame() {
   // Create initial two piles
   await addCardsToPile(p1Pile, 'p1Cards');
   const pileData = await addCardsToPile(p2Pile, 'p2Cards');
-  console.log('In Start Game');
   updateCardsRemaining(pileData.piles);
 }
 
@@ -54,10 +55,13 @@ function autoPlay() {
   timer = setTimeout(autoPlay, 1000);
 }
 
+function stopAutoPlay() {
+  clearTimeout(timer);
+}
+
 async function addCardsToPile(pile, pileName) {
   const deckId = localStorage.getItem('deckId');
   let cardsToAdd = pile.join(',');
-  console.log(`Adding ${cardsToAdd} to ${pileName}`);
   // Needed to get the data back to update number
   const res = await fetch(
     `https://deckofcardsapi.com/api/deck/${deckId}/pile/${pileName}/add/?cards=${cardsToAdd}`
@@ -70,7 +74,6 @@ async function nextMove() {
   let p1CardData;
   let p2CardData;
   let war = localStorage.getItem('war');
-  war = 'false';
   if (war === 'true') {
     // If state of war, draw 4 cards (3 to burn and the one to play)
     console.log('War so drawing 4');
@@ -107,13 +110,10 @@ async function nextMove() {
   }
   // Update the number
   const pileData = await getPileData('p1Cards');
-  console.log('Updating after the win');
-  console.log(pileData);
   updateCardsRemaining(pileData);
 }
 
 async function getPileData(pileName) {
-  console.log('Getting pile data');
   const deckId = localStorage.getItem('deckId');
 
   const res = await fetch(
@@ -131,6 +131,7 @@ async function drawCard(pileName, count = 1) {
   try {
     const res = await fetch(drawURL);
     if (!res.ok) {
+      // Problem? Most likely no cards left so game is over
       gameOver(pileName);
     }
     const data = await res.json();
@@ -141,8 +142,6 @@ async function drawCard(pileName, count = 1) {
 }
 
 function updateCardsRemaining(piles) {
-  console.log('Updating card number');
-  console.log(piles);
   // Iterate through each pile
   for (pile in piles) {
     document.querySelector(`#${pile}Count`).innerText = piles[pile].remaining;
@@ -214,9 +213,9 @@ function gameOver(loser) {
   const h2Ele = document.querySelector('#winner h2');
   if (loser === 'p1') {
     h2Ele.innerText = `Player 2 wins!`;
-    clearTimeout(timer);
+    stopAutoPlay();
   } else {
     h2Ele.innerText = `Player 1 wins!`;
-    clearTimeout(timer);
+    stopAutoPlay();
   }
 }
