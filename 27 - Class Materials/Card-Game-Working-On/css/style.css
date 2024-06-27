@@ -27,8 +27,20 @@ img {
 
 #cardDiv img {
   width: 200px;
+  border-radius: 0.8rem;
 }
 
+.win {
+  border: solid green 5px;
+}
+
+.lose {
+  border: solid red 5px;
+}
+
+.war {
+  border: solid orange 8px;
+}
 #cardDiv span {
   font-size: 3rem;
 }
