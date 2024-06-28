@@ -20,9 +20,7 @@
   <body>
     <h1>Play War!</h1>
     <section class="controls">
-      <button type="button" name="button" id="startGame">
-        Start a new game
-      </button>
+      <button type="button" name="button" id="startGame">Shuffle cards</button>
       <button type="button" name="button" id="nextMove">Next move</button>
       <button type="button" name="button" id="autoPlay">Auto play</button>
       <button type="button" name="button" id="stopAutoPlay">
@@ -30,6 +28,10 @@
       </button>
     </section>
     <main class="game">
+      <section class="names">
+        <h2>Player 1</h2>
+        <h2>Player 2</h2>
+      </section>
       <div id="cardDiv">
         <img
           src="https://deckofcardsapi.com/static/img/back.png"
@@ -45,12 +47,11 @@
           class=""
         />
       </div>
+      <section class="stats hidden">
+        <h3>Cards - <span id="p1CardsCount"></span></h3>
+        <h3>Cards - <span id="p2CardsCount"></span></h3>
+      </section>
     </main>
-    <section class="stats">
-      <h2>Cards remaining</h2>
-      <h3>Player 1 - <span id="p1CardsCount"></span></h3>
-      <h3>Player 2 - <span id="p2CardsCount"></span></h3>
-    </section>
     <div id="winner">
       <h2></h2>
     </div>

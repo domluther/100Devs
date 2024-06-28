@@ -1,3 +1,8 @@
+// TODO
+// Enable/disable buttons
+// Button styling
+// Option to change number of cards played
+
 // Make a card game of War
 
 /*
@@ -11,16 +16,18 @@ https://deckofcardsapi.com/
 
 */
 
-document.querySelector('#startGame').addEventListener('click', startGame);
+// Button event listeners
+document.querySelector('#startGame').addEventListener('click', shuffleAndDeal);
 document.querySelector('#nextMove').addEventListener('click', nextMove);
 document.querySelector('#autoPlay').addEventListener('click', autoPlay);
 document.querySelector('#stopAutoPlay').addEventListener('click', stopAutoPlay);
 
 let stackOfCards = [];
 let timer;
+initGame();
 
-async function startGame() {
-  document.querySelector('#winner h2').innerText = '';
+async function shuffleAndDeal() {
+  initGame();
   // Clear the stack of cards
   stackOfCards = [];
   // Add a setting to adjust the number of cards
@@ -89,7 +96,7 @@ async function nextMove() {
   }
   // Creates an object to pass in - allows images to be updated simultaneously
   let cardData = { p1: p1CardData, p2: p2CardData };
-  updateCardImage(cardData);
+  await updateCardImage(cardData);
 
   // Who won - check the first card - means it works irrespective of number of cards drawn
   const result = pickWinner(p1CardData[0], p2CardData[0]);
@@ -113,6 +120,7 @@ async function nextMove() {
     console.log('WAR!');
   }
   // Update the number on screen
+  document.querySelector('.stats').classList.remove('hidden');
   const pileData = await getPileData('p1Cards');
   updateCardsRemaining(pileData);
 }
@@ -152,7 +160,7 @@ function updateCardsRemaining(piles) {
   }
 }
 
-function updateCardImage(cardData) {
+async function updateCardImage(cardData) {
   console.log(cardData);
   for (playerName in cardData) {
     console.log(playerName);
@@ -193,24 +201,24 @@ function addToStack(cards) {
 function setBorder(winner) {
   const p1CardImg = document.querySelector('#p1CardsImg');
   const p2CardImg = document.querySelector('#p2CardsImg');
+  const body = document.querySelector('.game');
 
-  // Remove all states
+  // Remove all border states
   p1CardImg.classList.remove('win', 'lose', 'war');
   p2CardImg.classList.remove('win', 'lose', 'war');
+  body.classList.remove('war');
 
   // Apply the appropriate one
   if (winner === 'p1') {
-    document.body.style.backgroundColor = 'lightyellow';
     p1CardImg.classList.add('win');
     p2CardImg.classList.add('lose');
   } else if (winner === 'p2') {
-    document.body.style.backgroundColor = 'lightyellow';
     p1CardImg.classList.add('lose');
     p2CardImg.classList.add('win');
   } else {
-    document.body.style.backgroundColor = 'red';
     p1CardImg.classList.add('war');
     p2CardImg.classList.add('war');
+    body.classList.add('war');
   }
 }
 
@@ -222,5 +230,24 @@ function gameOver(loser) {
   } else {
     h2Ele.innerText = `Player 1 wins!`;
     stopAutoPlay();
+    // TODO: Add styling for winning
   }
+}
+
+function initGame() {
+  // Clear winner text
+  document.querySelector('#winner h2').innerText = '';
+
+  const p1CardImg = document.querySelector('#p1CardsImg');
+  const p2CardImg = document.querySelector('#p2CardsImg');
+
+  // Cards show back image
+  p1CardImg.src = 'https://deckofcardsapi.com/static/img/back.png';
+  p2CardImg.src = 'https://deckofcardsapi.com/static/img/back.png';
+
+  // Remove all states
+  p1CardImg.classList.remove('win', 'lose', 'war');
+  p2CardImg.classList.remove('win', 'lose', 'war');
+
+  document.querySelector('.stats').classList.add('hidden');
 }
