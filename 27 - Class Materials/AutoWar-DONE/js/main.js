@@ -3,8 +3,6 @@
 // Button styling
 // Option to change number of cards played
 
-// Make a card game of War
-
 /*
 2 players
 Each player draws their next card
@@ -30,10 +28,9 @@ async function shuffleAndDeal() {
   initGame();
   // Clear the stack of cards
   stackOfCards = [];
-  // Add a setting to adjust the number of cards
   const cardsToPlay = 16;
   localStorage.setItem('war', false);
-  // Get a new deck and draw the 52 cards
+  // Get a new deck and draw the appropriate number of cards
   const newDeckURL = `https://deckofcardsapi.com/api/deck/new/draw/?count=${cardsToPlay}`;
 
   const p1Pile = [];
