@@ -8,16 +8,23 @@ function getFetch() {
   fetch(url)
     .then((res) => res.json()) // parse response as JSON
     .then((data) => {
-      document.querySelector('h2').innerText = data.name;
+      // Make empty first
+      const classList = document.querySelector('.classes');
+      const subClassList = document.querySelector('.subclasses');
+
+      classList.innerHTML = '';
+      subClassList.innerHTML = '';
+
+      document.querySelector('.spellName').innerText = data.name;
       const usableClasses = data.classes;
       for (usableClass of usableClasses) {
-        document.querySelector('h3+ul').innerHTML +=
-          `<li>${usableClass.name}</li>`;
+        const li = document.createElement('li');
+        li.textContent = usableClass.name;
+        classList.appendChild(li);
       }
       const subClasses = data.subclasses;
       for (subClass of subClasses) {
-        document.querySelector('h4+ul').innerHTML +=
-          `<li>${subClass.name}</li>`;
+        subClassList.innerHTML += `<li>${subClass.name}</li>`;
       }
     })
     .catch((err) => {
