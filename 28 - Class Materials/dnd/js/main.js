@@ -11,11 +11,13 @@ function getFetch() {
       document.querySelector('h2').innerText = data.name;
       const usableClasses = data.classes;
       for (usableClass of usableClasses) {
-        document.querySelector('h3').innerText += usableClass.name;
+        document.querySelector('h3+ul').innerHTML +=
+          `<li>${usableClass.name}</li>`;
       }
       const subClasses = data.subclasses;
       for (subClass of subClasses) {
-        document.querySelector('h4').innerText += usableClass.name;
+        document.querySelector('h4+ul').innerHTML +=
+          `<li>${subClass.name}</li>`;
       }
     })
     .catch((err) => {
