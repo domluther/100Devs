@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 100%;
+}
+
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -15,10 +20,34 @@ img {
   margin: 0 auto;
 }
 
-.book {
-  font-size: 1.2rem;
-  line-height: 2.5rem;
+form {
+  font-size: 1.4rem;
 }
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+h1 {
+  font-size: 2.4rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.book {
+  line-height: 2rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.book span {
+  font-weight: 500;
+}

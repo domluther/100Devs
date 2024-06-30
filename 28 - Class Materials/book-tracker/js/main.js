@@ -51,7 +51,7 @@ function populateBooks() {
   booksEle.innerHTML = '';
   for (book of currentBooks) {
     booksEle.innerHTML += `  <section class="book">
-        <li><span class="title">${book.title}</span> by  <span class="author">${book.author}</span> - ISBN ${book.ISBN}</li>
+        <li><span class="title">${book.title}</span> by  <span class="author">${book.author}</span> (ISBN ${book.ISBN})</li>
       </section>`;
   }
 }
